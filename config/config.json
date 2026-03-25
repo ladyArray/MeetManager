@@ -2,18 +2,26 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "meeting-form-web-part": {
+    "meet-manager-dashboard-web-part": {
       "components": [
         {
-          "entrypoint": "./lib/webparts/meetingForm/MeetingFormWebPart.js",
-          "manifest": "./src/webparts/meetingForm/MeetingFormWebPart.manifest.json"
+          "entrypoint": "./lib/webparts/meetManagerDashboard/MeetManagerDashboardWebPart.js",
+          "manifest": "./src/webparts/meetManagerDashboard/MeetManagerDashboardWebPart.manifest.json"
+        }
+      ]
+    },
+    "teams-meetings-panel-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/teamsMeetingsPanel/TeamsMeetingsPanelWebPart.js",
+          "manifest": "./src/webparts/teamsMeetingsPanel/TeamsMeetingsPanelWebPart.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "MeetingFormWebPartStrings": "lib/webparts/meetingForm/loc/{locale}.js",
-    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
+    "MeetManagerDashboardWebPartStrings": "lib/webparts/meetManagerDashboard/loc/{locale}.js",
+    "TeamsMeetingsPanelWebPartStrings": "lib/webparts/teamsMeetingsPanel/loc/{locale}.js"
   }
 }

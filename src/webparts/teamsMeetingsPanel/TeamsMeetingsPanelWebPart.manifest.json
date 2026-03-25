@@ -1,0 +1,31 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "4b085cf2-102f-4481-b7c8-1fa888351a21",
+  "alias": "TeamsMeetingsPanelWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "TeamsTab", "TeamsPersonalApp"],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "1d691f20-1495-41c2-b870-5f3b9ac0a3ad",
+      "group": { "default": "Collaboration" },
+      "title": { "default": "Meet Manager Teams Panel" },
+      "description": { "default": "Panel compacto de proximas reuniones con acceso rapido a Teams." },
+      "officeFabricIconFontName": "TeamsLogo",
+      "properties": {
+        "title": "Meet Manager Teams Panel",
+        "dataSourceMode": "mock",
+        "meetingListTitle": "MM_Meetings",
+        "roomListTitle": "MM_MeetingRooms",
+        "templateListTitle": "MM_MeetingTemplates",
+        "incidentListTitle": "MM_MeetingIncidents",
+        "configurationListTitle": "MM_MeetingConfiguration",
+        "enableGraphAssist": true,
+        "maxItems": 5
+      }
+    }
+  ]
+}

@@ -3,34 +3,34 @@
   "solution": {
     "name": "meet-manager-client-side-solution",
     "id": "96d5ac42-a272-4097-801d-c04e83ef3ff8",
-    "version": "1.0.0.0",
+    "version": "1.1.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
     "developer": {
-      "name": "",
-      "websiteUrl": "",
-      "privacyUrl": "",
-      "termsOfUseUrl": "",
-      "mpnId": "Undefined-1.15.2"
+      "name": "Meet Manager Team",
+      "websiteUrl": "https://contoso.sharepoint.com",
+      "privacyUrl": "https://contoso.sharepoint.com/privacy",
+      "termsOfUseUrl": "https://contoso.sharepoint.com/terms",
+      "mpnId": "Undefined-1.22.1"
     },
     "metadata": {
       "shortDescription": {
-        "default": "meet-manager description"
+        "default": "Centro operativo de reuniones presenciales, virtuales e hibridas para Microsoft 365."
       },
       "longDescription": {
-        "default": "meet-manager description"
+        "default": "Meet Manager centraliza planificacion, operacion, salas, contexto de Teams y seguimiento de reuniones desde SharePoint Framework."
       },
       "screenshotPaths": [],
       "videoUrl": "",
-      "categories": []
+      "categories": ["Collaboration", "Productivity"]
     },
     "features": [
       {
-        "title": "meet-manager Feature",
-        "description": "The feature that activates elements of the meet-manager solution.",
+        "title": "Meet Manager Feature",
+        "description": "Activa los webparts de dashboard y panel operativo de Teams para Meet Manager.",
         "id": "7d34f434-c367-4786-9719-9752f7e5c00c",
-        "version": "1.0.0.0"
+        "version": "1.1.0.0"
       }
     ]
   },

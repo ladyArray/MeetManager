@@ -1,0 +1,91 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: #102a43;
+}
+
+.hero,
+.activeCard,
+.listSurface,
+.meetingCard {
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.05);
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  background: linear-gradient(135deg, #0b1f33 0%, #164e63 60%, #155eef 100%);
+  color: #f8fbff;
+}
+
+.eyebrow {
+  font-size: 12px;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.title {
+  margin: 8px 0;
+  font-size: 24px;
+}
+
+.subtitle,
+.meta,
+.muted {
+  color: #627d98;
+  font-size: 13px;
+}
+
+.hero .subtitle {
+  color: rgba(248, 251, 255, 0.88);
+}
+
+.cardHeader,
+.sectionHeader,
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.activeTitle {
+  margin: 10px 0 6px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.badge,
+.timeChip {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eef4ff;
+  color: #175cd3;
+  font-size: 12px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.meetingCard {
+  padding: 14px;
+  background: #f8fbff;
+}
+
+.loading,
+.empty {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
