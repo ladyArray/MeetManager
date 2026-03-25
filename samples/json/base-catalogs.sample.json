@@ -1,0 +1,31 @@
+{
+  "configurations": [
+    {
+      "Title": "Saved Filters - Operaciones",
+      "MMConfigurationKey": "filters.operations.default",
+      "MMConfigurationScope": "Solution",
+      "MMConfigurationType": "Json",
+      "MMJsonValue": "{\"view\":\"agenda\",\"meetingType\":\"all\",\"status\":\"Scheduled\"}",
+      "MMEnvironmentName": "dev",
+      "MMActive": true
+    },
+    {
+      "Title": "Default Working Hours",
+      "MMConfigurationKey": "calendar.workingHours",
+      "MMConfigurationScope": "Environment",
+      "MMConfigurationType": "Json",
+      "MMJsonValue": "{\"start\":\"08:30\",\"end\":\"18:30\",\"timezone\":\"Romance Standard Time\"}",
+      "MMEnvironmentName": "dev",
+      "MMActive": true
+    },
+    {
+      "Title": "Room recommendation policy",
+      "MMConfigurationKey": "rooms.recommendationPolicy",
+      "MMConfigurationScope": "Solution",
+      "MMConfigurationType": "Json",
+      "MMJsonValue": "{\"preferHybridKit\":true,\"capacityBuffer\":2,\"preferTeamsRooms\":true}",
+      "MMEnvironmentName": "dev",
+      "MMActive": true
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+Title,MMTemplateCode,MMMeetingTypeDefault,MMDurationMinutes,MMDefaultPriority,MMDefaultTeamsEnabled,MMDefaultRoomRequired,MMCategory,MMActive
+Comite Operativo,TPL-OPS-001,Hybrid,60,High,TRUE,TRUE,Operaciones,TRUE
+Seguimiento Semanal,TPL-OPS-002,Virtual,30,Normal,TRUE,FALSE,Seguimiento,TRUE

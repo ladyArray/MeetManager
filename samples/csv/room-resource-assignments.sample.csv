@@ -1,0 +1,4 @@
+Title,MMRoomCode,MMResourceCode,MMQuantity,MMIsOperational,MMInventoryCode
+Sala Horizonte - Display 65,R-MAD-101,RES-DISPLAY-65,1,TRUE,INV-1001
+Sala Horizonte - Camera PTZ,R-MAD-101,RES-CAM-PTZ,1,TRUE,INV-1002
+Sala Forum - Accessibility Kit,R-BCN-204,RES-ACCESS-01,1,TRUE,INV-2001

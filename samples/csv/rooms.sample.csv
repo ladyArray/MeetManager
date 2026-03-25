@@ -1,0 +1,3 @@
+Title,MMRoomCode,MMLocationCode,MMRoomMailbox,MMCapacity,MMRoomStatus,MMFloor,MMZone,MMHasTeamsDevice,MMDefaultEquipmentProfile
+Sala Horizonte,R-MAD-101,MAD-HQ,salahorizonte@contoso.com,12,Available,1,Norte,TRUE,"Display;Camera;Microphone;HybridKit"
+Sala Forum,R-BCN-204,BCN-HUB,salaforum@contoso.com,8,Available,2,Este,FALSE,"Display;Whiteboard"

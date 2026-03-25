@@ -1,0 +1,4 @@
+Title,MMResourceCode,MMResourceType,MMCategory,MMDescription,MMDefaultQuantity,MMIsBookable,MMActive
+Display 65,RES-DISPLAY-65,Display,AV,Pantalla principal de 65 pulgadas,1,FALSE,TRUE
+Camera PTZ,RES-CAM-PTZ,Camera,AV,Camara robotizada para reuniones hibridas,1,FALSE,TRUE
+Accessibility Kit,RES-ACCESS-01,Accessible,Accessibility,Kit de accesibilidad para reuniones inclusivas,1,TRUE,TRUE

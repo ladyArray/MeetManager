@@ -1,0 +1,18 @@
+{
+  "targetList": "MM_Meetings",
+  "keyField": "MMMeetingCode",
+  "lookupMappings": [
+    {
+      "csvColumn": "MMRoomCode",
+      "targetField": "MMRoomLookup",
+      "lookupList": "MM_MeetingRooms",
+      "lookupKeyField": "MMRoomCode"
+    },
+    {
+      "csvColumn": "MMLocationCode",
+      "targetField": "MMLocationLookup",
+      "lookupList": "MM_Locations",
+      "lookupKeyField": "MMLocationCode"
+    }
+  ]
+}
