@@ -1,0 +1,910 @@
+[
+  {
+    "title": "Locations",
+    "internalName": "MM_Locations",
+    "kind": "List",
+    "template": "GenericList",
+    "classification": "Master",
+    "description": "Catalogo de ubicaciones corporativas utilizadas por salas y reuniones presenciales.",
+    "settings": {
+      "enableVersioning": true,
+      "majorVersions": 20,
+      "enableAttachments": false
+    },
+    "fields": [
+      {
+        "displayName": "Location code",
+        "internalName": "MMLocationCode",
+        "type": "Text",
+        "required": true,
+        "indexed": true,
+        "maxLength": 64,
+        "description": "Codigo funcional de la ubicacion."
+      },
+      {
+        "displayName": "Campus",
+        "internalName": "MMCampus",
+        "type": "Text",
+        "required": false,
+        "indexed": false,
+        "maxLength": 128,
+        "description": "Campus o recinto."
+      },
+      {
+        "displayName": "Building",
+        "internalName": "MMBuilding",
+        "type": "Text",
+        "required": false,
+        "indexed": false,
+        "maxLength": 128,
+        "description": "Edificio."
+      },
+      {
+        "displayName": "City",
+        "internalName": "MMCity",
+        "type": "Text",
+        "required": false,
+        "indexed": false,
+        "maxLength": 128,
+        "description": "Ciudad."
+      },
+      {
+        "displayName": "Country",
+        "internalName": "MMCountry",
+        "type": "Text",
+        "required": false,
+        "indexed": false,
+        "maxLength": 128,
+        "description": "Pais."
+      },
+      {
+        "displayName": "Time zone",
+        "internalName": "MMTimezone",
+        "type": "Text",
+        "required": false,
+        "indexed": false,
+        "maxLength": 64,
+        "description": "Zona horaria IANA o Windows."
+      },
+      {
+        "displayName": "Address",
+        "internalName": "MMAddress",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 6,
+        "plainText": true,
+        "description": "Direccion postal o indicaciones."
+      },
+      {
+        "displayName": "Map URL",
+        "internalName": "MMMapUrl",
+        "type": "URL",
+        "required": false,
+        "description": "Enlace a mapa o plano."
+      },
+      {
+        "displayName": "Active",
+        "internalName": "MMActive",
+        "type": "Boolean",
+        "required": true,
+        "indexed": true,
+        "defaultValue": true,
+        "description": "Marca si la ubicacion sigue operativa."
+      }
+    ],
+    "indexes": [
+      "MMLocationCode",
+      "MMActive"
+    ],
+    "views": [
+      {
+        "title": "All active locations",
+        "setAsDefault": true,
+        "rowLimit": 100,
+        "fields": [
+          "Title",
+          "MMLocationCode",
+          "MMCampus",
+          "MMBuilding",
+          "MMCity",
+          "MMCountry",
+          "MMTimezone",
+          "MMActive"
+        ],
+        "query": "<OrderBy><FieldRef Name='Title' /></OrderBy>"
+      }
+    ]
+  },
+  {
+    "title": "Rooms",
+    "internalName": "MM_MeetingRooms",
+    "kind": "List",
+    "template": "GenericList",
+    "classification": "Master",
+    "description": "Catalogo maestro de salas fisicas.",
+    "settings": {
+      "enableVersioning": true,
+      "majorVersions": 20,
+      "enableAttachments": false
+    },
+    "fields": [
+      {
+        "displayName": "Room code",
+        "internalName": "MMRoomCode",
+        "type": "Text",
+        "required": true,
+        "indexed": true,
+        "maxLength": 64,
+        "description": "Codigo funcional interno de la sala."
+      },
+      {
+        "displayName": "Room id",
+        "internalName": "MMRoomId",
+        "type": "Text",
+        "required": false,
+        "indexed": false,
+        "maxLength": 128,
+        "description": "Identificador snapshot de compatibilidad para el servicio SPFx actual."
+      },
+      {
+        "displayName": "Location",
+        "internalName": "MMLocationLookup",
+        "type": "Lookup",
+        "required": true,
+        "indexed": true,
+        "lookupList": "MM_Locations",
+        "lookupField": "Title",
+        "description": "Ubicacion corporativa de la sala."
+      },
+      {
+        "displayName": "Room mailbox",
+        "internalName": "MMRoomMailbox",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Mailbox de recurso en Exchange Online."
+      },
+      {
+        "displayName": "Capacity",
+        "internalName": "MMCapacity",
+        "type": "Number",
+        "required": true,
+        "indexed": true,
+        "minValue": 1,
+        "decimals": 0,
+        "description": "Aforo maximo recomendado."
+      },
+      {
+        "displayName": "Room status",
+        "internalName": "MMRoomStatus",
+        "type": "Choice",
+        "required": true,
+        "indexed": true,
+        "defaultValue": "Available",
+        "choices": [
+          "Available",
+          "Unavailable",
+          "Maintenance",
+          "Reserved"
+        ],
+        "description": "Estado operativo de la sala."
+      },
+      {
+        "displayName": "Floor",
+        "internalName": "MMFloor",
+        "type": "Text",
+        "required": false,
+        "maxLength": 64,
+        "description": "Planta o nivel."
+      },
+      {
+        "displayName": "Building snapshot",
+        "internalName": "MMBuilding",
+        "type": "Text",
+        "required": false,
+        "maxLength": 128,
+        "description": "Snapshot para compatibilidad con el servicio SharePoint actual."
+      },
+      {
+        "displayName": "Location label",
+        "internalName": "MMLocationLabel",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Etiqueta visible simplificada para UI actual."
+      },
+      {
+        "displayName": "Zone",
+        "internalName": "MMZone",
+        "type": "Text",
+        "required": false,
+        "maxLength": 64,
+        "description": "Zona o ala."
+      },
+      {
+        "displayName": "Map URL",
+        "internalName": "MMMapUrl",
+        "type": "URL",
+        "required": false,
+        "description": "Plano o localizacion."
+      },
+      {
+        "displayName": "Has Teams device",
+        "internalName": "MMHasTeamsDevice",
+        "type": "Boolean",
+        "required": true,
+        "defaultValue": false,
+        "description": "Indica si dispone de Teams Rooms."
+      },
+      {
+        "displayName": "Default equipment profile",
+        "internalName": "MMDefaultEquipmentProfile",
+        "type": "MultiChoice",
+        "required": false,
+        "choices": [
+          "Display",
+          "Camera",
+          "Microphone",
+          "Whiteboard",
+          "Speakerphone",
+          "Recording",
+          "DualScreen",
+          "Accessible",
+          "HybridKit"
+        ],
+        "description": "Capacidades base para sugerencia de sala."
+      },
+      {
+        "displayName": "Features JSON",
+        "internalName": "MMFeaturesJson",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 6,
+        "plainText": true,
+        "description": "Snapshot JSON de compatibilidad para la UI actual."
+      },
+      {
+        "displayName": "Room state compatibility",
+        "internalName": "MMRoomState",
+        "type": "Choice",
+        "required": false,
+        "choices": [
+          "available",
+          "busy",
+          "soon",
+          "maintenance"
+        ],
+        "description": "Estado de compatibilidad para el servicio actual."
+      },
+      {
+        "displayName": "Accessibility notes",
+        "internalName": "MMAccessibilityNotes",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 6,
+        "plainText": true,
+        "description": "Observaciones de accesibilidad."
+      },
+      {
+        "displayName": "Operational notes",
+        "internalName": "MMOperationalNotes",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 6,
+        "plainText": true,
+        "description": "Observaciones de soporte."
+      },
+      {
+        "displayName": "Room notes compatibility",
+        "internalName": "MMRoomNotes",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 6,
+        "plainText": true,
+        "description": "Notas snapshot para la UI actual."
+      },
+      {
+        "displayName": "Managed by",
+        "internalName": "MMManagedBy",
+        "type": "User",
+        "required": false,
+        "allowMultiple": false,
+        "selectionMode": "PeopleOnly",
+        "description": "Responsable operativo de la sala."
+      },
+      {
+        "displayName": "Exchange resource id",
+        "internalName": "MMExchangeResourceId",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Identificador del recurso si se integra con Graph."
+      }
+    ],
+    "indexes": [
+      "MMRoomCode",
+      "MMLocationLookup",
+      "MMCapacity",
+      "MMRoomStatus"
+    ],
+    "views": [
+      {
+        "title": "All active rooms",
+        "setAsDefault": true,
+        "rowLimit": 100,
+        "fields": [
+          "Title",
+          "MMRoomCode",
+          "MMLocationLookup",
+          "MMCapacity",
+          "MMRoomStatus",
+          "MMHasTeamsDevice"
+        ],
+        "query": "<OrderBy><FieldRef Name='Title' /></OrderBy>"
+      },
+      {
+        "title": "Maintenance",
+        "setAsDefault": false,
+        "rowLimit": 50,
+        "fields": [
+          "Title",
+          "MMRoomCode",
+          "MMLocationLookup",
+          "MMRoomStatus",
+          "MMManagedBy"
+        ],
+        "query": "<Where><Eq><FieldRef Name='MMRoomStatus' /><Value Type='Choice'>Maintenance</Value></Eq></Where><OrderBy><FieldRef Name='Title' /></OrderBy>"
+      }
+    ]
+  },
+  {
+    "title": "Room resources",
+    "internalName": "MM_RoomResources",
+    "kind": "List",
+    "template": "GenericList",
+    "classification": "Master",
+    "description": "Catalogo maestro de recursos y equipamientos.",
+    "settings": {
+      "enableVersioning": true,
+      "majorVersions": 20,
+      "enableAttachments": false
+    },
+    "fields": [
+      {
+        "displayName": "Resource code",
+        "internalName": "MMResourceCode",
+        "type": "Text",
+        "required": true,
+        "indexed": true,
+        "maxLength": 64,
+        "description": "Codigo maestro del recurso."
+      },
+      {
+        "displayName": "Resource type",
+        "internalName": "MMResourceType",
+        "type": "Choice",
+        "required": true,
+        "choices": [
+          "Display",
+          "Camera",
+          "Microphone",
+          "Whiteboard",
+          "Speakerphone",
+          "Recording",
+          "DualScreen",
+          "Accessible",
+          "HybridKit",
+          "Other"
+        ],
+        "description": "Tipo operativo del recurso."
+      },
+      {
+        "displayName": "Category",
+        "internalName": "MMCategory",
+        "type": "Choice",
+        "required": true,
+        "choices": [
+          "AV",
+          "Furniture",
+          "Connectivity",
+          "Accessibility",
+          "Other"
+        ],
+        "description": "Categoria administrativa."
+      },
+      {
+        "displayName": "Description",
+        "internalName": "MMDescription",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 6,
+        "plainText": true,
+        "description": "Descripcion funcional."
+      },
+      {
+        "displayName": "Summary",
+        "internalName": "MMSummary",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Resumen corto para compatibilidad con la UI actual."
+      },
+      {
+        "displayName": "Default quantity",
+        "internalName": "MMDefaultQuantity",
+        "type": "Number",
+        "required": true,
+        "defaultValue": 1,
+        "minValue": 0,
+        "decimals": 0,
+        "description": "Cantidad por defecto."
+      },
+      {
+        "displayName": "Is bookable",
+        "internalName": "MMIsBookable",
+        "type": "Boolean",
+        "required": true,
+        "defaultValue": false,
+        "description": "Si el recurso se reserva como entidad propia."
+      },
+      {
+        "displayName": "Active",
+        "internalName": "MMActive",
+        "type": "Boolean",
+        "required": true,
+        "indexed": true,
+        "defaultValue": true,
+        "description": "Marca si el recurso sigue disponible."
+      }
+    ],
+    "indexes": [
+      "MMResourceCode",
+      "MMActive"
+    ],
+    "views": [
+      {
+        "title": "Active resources",
+        "setAsDefault": true,
+        "rowLimit": 100,
+        "fields": [
+          "Title",
+          "MMResourceCode",
+          "MMResourceType",
+          "MMCategory",
+          "MMDefaultQuantity",
+          "MMActive"
+        ],
+        "query": "<OrderBy><FieldRef Name='Title' /></OrderBy>"
+      }
+    ]
+  },
+  {
+    "title": "Room resource assignments",
+    "internalName": "MM_RoomResourceAssignments",
+    "kind": "List",
+    "template": "GenericList",
+    "classification": "Operational",
+    "description": "Relacion n:n entre salas y recursos.",
+    "settings": {
+      "enableVersioning": true,
+      "majorVersions": 20,
+      "enableAttachments": false
+    },
+    "fields": [
+      {
+        "displayName": "Room",
+        "internalName": "MMRoomLookup",
+        "type": "Lookup",
+        "required": true,
+        "indexed": true,
+        "lookupList": "MM_MeetingRooms",
+        "lookupField": "Title",
+        "description": "Sala a la que se asigna el recurso."
+      },
+      {
+        "displayName": "Resource",
+        "internalName": "MMResourceLookup",
+        "type": "Lookup",
+        "required": true,
+        "indexed": true,
+        "lookupList": "MM_RoomResources",
+        "lookupField": "Title",
+        "description": "Recurso asignado."
+      },
+      {
+        "displayName": "Quantity",
+        "internalName": "MMQuantity",
+        "type": "Number",
+        "required": true,
+        "defaultValue": 1,
+        "minValue": 0,
+        "decimals": 0,
+        "description": "Cantidad disponible."
+      },
+      {
+        "displayName": "Is operational",
+        "internalName": "MMIsOperational",
+        "type": "Boolean",
+        "required": true,
+        "indexed": true,
+        "defaultValue": true,
+        "description": "Estado operativo del recurso en la sala."
+      },
+      {
+        "displayName": "Inventory code",
+        "internalName": "MMInventoryCode",
+        "type": "Text",
+        "required": false,
+        "maxLength": 128,
+        "description": "Codigo de inventario."
+      },
+      {
+        "displayName": "Notes",
+        "internalName": "MMNotes",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 4,
+        "plainText": true,
+        "description": "Observaciones tecnicas."
+      }
+    ],
+    "indexes": [
+      "MMRoomLookup",
+      "MMResourceLookup",
+      "MMIsOperational"
+    ],
+    "views": [
+      {
+        "title": "By room",
+        "setAsDefault": true,
+        "rowLimit": 100,
+        "fields": [
+          "Title",
+          "MMRoomLookup",
+          "MMResourceLookup",
+          "MMQuantity",
+          "MMIsOperational"
+        ],
+        "query": "<OrderBy><FieldRef Name='MMRoomLookup' /><FieldRef Name='MMResourceLookup' /></OrderBy>"
+      }
+    ]
+  },
+  {
+    "title": "Meeting templates",
+    "internalName": "MM_MeetingTemplates",
+    "kind": "List",
+    "template": "GenericList",
+    "classification": "Master",
+    "description": "Plantillas reutilizables para reuniones estandarizadas.",
+    "settings": {
+      "enableVersioning": true,
+      "majorVersions": 30,
+      "enableAttachments": false
+    },
+    "fields": [
+      {
+        "displayName": "Template code",
+        "internalName": "MMTemplateCode",
+        "type": "Text",
+        "required": true,
+        "indexed": true,
+        "maxLength": 64,
+        "description": "Codigo funcional de plantilla."
+      },
+      {
+        "displayName": "Description",
+        "internalName": "MMDescription",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 6,
+        "plainText": true,
+        "description": "Descripcion funcional."
+      },
+      {
+        "displayName": "Default meeting type",
+        "internalName": "MMMeetingTypeDefault",
+        "type": "Choice",
+        "required": true,
+        "defaultValue": "Hybrid",
+        "choices": [
+          "Onsite",
+          "Virtual",
+          "Hybrid"
+        ],
+        "description": "Tipo de reunion sugerido."
+      },
+      {
+        "displayName": "Duration minutes",
+        "internalName": "MMDurationMinutes",
+        "type": "Number",
+        "required": true,
+        "defaultValue": 60,
+        "minValue": 15,
+        "decimals": 0,
+        "description": "Duracion recomendada."
+      },
+      {
+        "displayName": "Default priority",
+        "internalName": "MMDefaultPriority",
+        "type": "Choice",
+        "required": true,
+        "defaultValue": "Normal",
+        "choices": [
+          "Low",
+          "Normal",
+          "High",
+          "Critical"
+        ],
+        "description": "Prioridad sugerida."
+      },
+      {
+        "displayName": "Default equipment needs",
+        "internalName": "MMDefaultEquipmentNeeds",
+        "type": "MultiChoice",
+        "required": false,
+        "choices": [
+          "Display",
+          "Camera",
+          "Microphone",
+          "Whiteboard",
+          "Speakerphone",
+          "Recording",
+          "DualScreen",
+          "Accessible",
+          "HybridKit"
+        ],
+        "description": "Equipamiento sugerido."
+      },
+      {
+        "displayName": "Agenda template",
+        "internalName": "MMAgendaTemplate",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Agenda base recomendada."
+      },
+      {
+        "displayName": "Checklist template JSON",
+        "internalName": "MMChecklistTemplateJson",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Checklist serializado para la UI."
+      },
+      {
+        "displayName": "Defaults JSON",
+        "internalName": "MMDefaultsJson",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Snapshot JSON de compatibilidad para la UI actual."
+      },
+      {
+        "displayName": "Default Teams enabled",
+        "internalName": "MMDefaultTeamsEnabled",
+        "type": "Boolean",
+        "required": true,
+        "defaultValue": false,
+        "description": "Propone enlace Teams por defecto."
+      },
+      {
+        "displayName": "Default room required",
+        "internalName": "MMDefaultRoomRequired",
+        "type": "Boolean",
+        "required": true,
+        "defaultValue": false,
+        "description": "Propone reserva de sala por defecto."
+      },
+      {
+        "displayName": "Category",
+        "internalName": "MMCategory",
+        "type": "Text",
+        "required": false,
+        "maxLength": 128,
+        "description": "Categoria funcional de la plantilla."
+      },
+      {
+        "displayName": "Related template asset URL",
+        "internalName": "MMRelatedTemplateAssetUrl",
+        "type": "URL",
+        "required": false,
+        "description": "Enlace a activo documental relacionado."
+      },
+      {
+        "displayName": "Active",
+        "internalName": "MMActive",
+        "type": "Boolean",
+        "required": true,
+        "indexed": true,
+        "defaultValue": true,
+        "description": "Activa o desactiva la plantilla."
+      }
+    ],
+    "indexes": [
+      "MMTemplateCode",
+      "MMActive"
+    ],
+    "views": [
+      {
+        "title": "Active templates",
+        "setAsDefault": true,
+        "rowLimit": 100,
+        "fields": [
+          "Title",
+          "MMTemplateCode",
+          "MMMeetingTypeDefault",
+          "MMDurationMinutes",
+          "MMDefaultPriority",
+          "MMActive"
+        ],
+        "query": "<OrderBy><FieldRef Name='Title' /></OrderBy>"
+      }
+    ]
+  },
+  {
+    "title": "Meeting configurations",
+    "internalName": "MM_MeetingConfigurations",
+    "kind": "List",
+    "template": "GenericList",
+    "classification": "Auxiliary",
+    "description": "Configuracion funcional, filtros guardados y ajustes por entorno o por usuario.",
+    "settings": {
+      "enableVersioning": true,
+      "majorVersions": 50,
+      "enableAttachments": false
+    },
+    "fields": [
+      {
+        "displayName": "Configuration key",
+        "internalName": "MMConfigurationKey",
+        "type": "Text",
+        "required": true,
+        "indexed": true,
+        "maxLength": 128,
+        "description": "Clave funcional unica."
+      },
+      {
+        "displayName": "Description",
+        "internalName": "MMDescription",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 6,
+        "plainText": true,
+        "description": "Descripcion funcional o administrativa."
+      },
+      {
+        "displayName": "Configuration scope",
+        "internalName": "MMConfigurationScope",
+        "type": "Choice",
+        "required": true,
+        "defaultValue": "Solution",
+        "choices": [
+          "Solution",
+          "Site",
+          "User",
+          "Environment"
+        ],
+        "description": "Ambito de aplicacion."
+      },
+      {
+        "displayName": "Configuration type",
+        "internalName": "MMConfigurationType",
+        "type": "Choice",
+        "required": true,
+        "defaultValue": "Json",
+        "choices": [
+          "Json",
+          "Text",
+          "Number",
+          "Boolean"
+        ],
+        "description": "Tipo de dato esperado."
+      },
+      {
+        "displayName": "JSON value",
+        "internalName": "MMJsonValue",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Valor serializado JSON."
+      },
+      {
+        "displayName": "Text value",
+        "internalName": "MMTextValue",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Valor textual corto."
+      },
+      {
+        "displayName": "Number value",
+        "internalName": "MMNumberValue",
+        "type": "Number",
+        "required": false,
+        "decimals": 2,
+        "description": "Valor numerico."
+      },
+      {
+        "displayName": "Boolean value",
+        "internalName": "MMBooleanValue",
+        "type": "Boolean",
+        "required": false,
+        "defaultValue": false,
+        "description": "Valor booleano."
+      },
+      {
+        "displayName": "Environment name",
+        "internalName": "MMEnvironmentName",
+        "type": "Choice",
+        "required": false,
+        "indexed": true,
+        "choices": [
+          "dev",
+          "int",
+          "pre",
+          "prod"
+        ],
+        "description": "Entorno al que aplica la configuracion."
+      },
+      {
+        "displayName": "Owner email",
+        "internalName": "MMOwnerEmail",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Usuario propietario del ajuste."
+      },
+      {
+        "displayName": "Accent color",
+        "internalName": "MMAccentColor",
+        "type": "Text",
+        "required": false,
+        "maxLength": 32,
+        "description": "Color de apoyo para filtros o vistas guardadas."
+      },
+      {
+        "displayName": "Saved filter JSON",
+        "internalName": "MMSavedFilterJson",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Filtro serializado de compatibilidad con la UI actual."
+      },
+      {
+        "displayName": "Active",
+        "internalName": "MMActive",
+        "type": "Boolean",
+        "required": true,
+        "indexed": true,
+        "defaultValue": true,
+        "description": "Activa o desactiva el registro."
+      }
+    ],
+    "indexes": [
+      "MMConfigurationKey",
+      "MMEnvironmentName",
+      "MMActive"
+    ],
+    "views": [
+      {
+        "title": "By scope",
+        "setAsDefault": true,
+        "rowLimit": 100,
+        "fields": [
+          "Title",
+          "MMConfigurationKey",
+          "MMConfigurationScope",
+          "MMConfigurationType",
+          "MMEnvironmentName",
+          "MMActive"
+        ],
+        "query": "<OrderBy><FieldRef Name='MMConfigurationScope' /><FieldRef Name='Title' /></OrderBy>"
+      }
+    ]
+  }
+]

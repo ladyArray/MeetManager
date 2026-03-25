@@ -1,0 +1,57 @@
+{
+  "environmentName": "dev",
+  "siteUrl": "https://<tenant>.sharepoint.com/sites/<meet-manager-dev>",
+  "clientId": "<entra-app-id>",
+  "lists": {
+    "locations": "MM_Locations",
+    "rooms": "MM_MeetingRooms",
+    "roomResources": "MM_RoomResources",
+    "roomResourceAssignments": "MM_RoomResourceAssignments",
+    "templates": "MM_MeetingTemplates",
+    "configurations": "MM_MeetingConfigurations",
+    "meetings": "MM_Meetings",
+    "attendees": "MM_MeetingAttendees",
+    "notes": "MM_MeetingNotes",
+    "incidents": "MM_MeetingIncidents"
+  },
+  "libraries": {
+    "meetingDocuments": "MM_MeetingDocuments",
+    "templateAssets": "MM_TemplateAssets"
+  },
+  "security": {
+    "breakInheritance": [
+      "MM_MeetingConfigurations",
+      "MM_MeetingIncidents"
+    ],
+    "groupRoles": [
+      {
+        "groupName": "<Meet Manager Owners>",
+        "lists": [
+          "MM_MeetingConfigurations",
+          "MM_MeetingIncidents",
+          "MM_MeetingDocuments"
+        ],
+        "role": "Full Control"
+      },
+      {
+        "groupName": "<Meet Manager Members>",
+        "lists": [
+          "MM_Meetings",
+          "MM_MeetingAttendees",
+          "MM_MeetingNotes",
+          "MM_MeetingDocuments"
+        ],
+        "role": "Edit"
+      },
+      {
+        "groupName": "<Meet Manager Visitors>",
+        "lists": [
+          "MM_MeetingRooms",
+          "MM_Locations",
+          "MM_TemplateAssets"
+        ],
+        "role": "Read"
+      }
+    ]
+  }
+}

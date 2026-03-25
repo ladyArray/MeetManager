@@ -1,0 +1,6 @@
+{
+  "environmentName": "pre",
+  "siteUrl": "https://<tenant>.sharepoint.com/sites/<meet-manager-pre>",
+  "clientId": "<entra-app-id>",
+  "inheritsFrom": "environment.dev.sample.json"
+}

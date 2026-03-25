@@ -1,0 +1,132 @@
+{
+  "group": "Meet Manager Content Types",
+  "siteColumnGroup": "Meet Manager Site Columns",
+  "siteColumns": [
+    {
+      "displayName": "Meeting document meeting",
+      "internalName": "MMDocMeetingLookup",
+      "type": "Lookup",
+      "lookupList": "MM_Meetings",
+      "lookupField": "Title",
+      "required": false,
+      "indexed": true,
+      "description": "Relacion con la reunion en bibliotecas documentales."
+    },
+    {
+      "displayName": "Meeting document code",
+      "internalName": "MMDocMeetingCode",
+      "type": "Text",
+      "required": false,
+      "indexed": true,
+      "maxLength": 64,
+      "description": "Codigo de reunion para busqueda documental."
+    },
+    {
+      "displayName": "Meeting document category",
+      "internalName": "MMDocDocumentCategory",
+      "type": "Choice",
+      "required": true,
+      "defaultValue": "PreRead",
+      "choices": [
+        "Agenda",
+        "Minutes",
+        "PreRead",
+        "Support",
+        "Logistics",
+        "Incident",
+        "Other"
+      ],
+      "description": "Categoria documental."
+    },
+    {
+      "displayName": "Meeting document status",
+      "internalName": "MMDocDocumentStatus",
+      "type": "Choice",
+      "required": true,
+      "defaultValue": "Draft",
+      "choices": [
+        "Draft",
+        "Shared",
+        "Final",
+        "Archived"
+      ],
+      "description": "Estado documental."
+    },
+    {
+      "displayName": "Meeting document date",
+      "internalName": "MMDocDocumentDate",
+      "type": "DateTime",
+      "required": false,
+      "displayFormat": "DateOnly",
+      "description": "Fecha funcional del documento."
+    },
+    {
+      "displayName": "Meeting document confidentiality",
+      "internalName": "MMDocConfidentiality",
+      "type": "Choice",
+      "required": true,
+      "defaultValue": "Internal",
+      "choices": [
+        "PublicInternal",
+        "Internal",
+        "Restricted",
+        "Confidential"
+      ],
+      "description": "Sensibilidad funcional del documento."
+    },
+    {
+      "displayName": "Meeting document template",
+      "internalName": "MMDocTemplateLookup",
+      "type": "Lookup",
+      "lookupList": "MM_MeetingTemplates",
+      "lookupField": "Title",
+      "required": false,
+      "description": "Plantilla relacionada."
+    },
+    {
+      "displayName": "Template asset type",
+      "internalName": "MMDocTemplateAssetType",
+      "type": "Choice",
+      "required": true,
+      "defaultValue": "Document",
+      "choices": [
+        "Agenda",
+        "Checklist",
+        "Presentation",
+        "Document",
+        "Email"
+      ],
+      "description": "Tipo de activo de plantilla."
+    }
+  ],
+  "contentTypes": [
+    {
+      "name": "MM Meeting Document",
+      "description": "Documento operativo asociado a una reunion.",
+      "parentContentTypeId": "0x0101",
+      "targetLibrary": "MM_MeetingDocuments",
+      "default": true,
+      "siteColumns": [
+        "MMDocMeetingLookup",
+        "MMDocMeetingCode",
+        "MMDocDocumentCategory",
+        "MMDocDocumentStatus",
+        "MMDocDocumentDate",
+        "MMDocConfidentiality",
+        "MMDocTemplateLookup"
+      ]
+    },
+    {
+      "name": "MM Template Asset",
+      "description": "Activo reutilizable de plantilla de reunion.",
+      "parentContentTypeId": "0x0101",
+      "targetLibrary": "MM_TemplateAssets",
+      "default": true,
+      "siteColumns": [
+        "MMDocTemplateLookup",
+        "MMDocTemplateAssetType",
+        "MMDocConfidentiality"
+      ]
+    }
+  ]
+}

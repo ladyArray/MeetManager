@@ -1,0 +1,255 @@
+[
+  {
+    "title": "Meeting documents",
+    "internalName": "MM_MeetingDocuments",
+    "kind": "Library",
+    "template": "DocumentLibrary",
+    "classification": "Operational",
+    "description": "Biblioteca central de documentacion asociada a reuniones.",
+    "settings": {
+      "enableVersioning": true,
+      "majorVersions": 50,
+      "enableMinorVersions": true,
+      "minorVersions": 5,
+      "enableContentTypes": true,
+      "enableFolderCreation": false
+    },
+    "fields": [
+      {
+        "displayName": "Meeting",
+        "internalName": "MMMeetingLookup",
+        "type": "Lookup",
+        "required": false,
+        "indexed": true,
+        "lookupList": "MM_Meetings",
+        "lookupField": "Title",
+        "description": "Reunion asociada."
+      },
+      {
+        "displayName": "Meeting code",
+        "internalName": "MMMeetingCode",
+        "type": "Text",
+        "required": false,
+        "indexed": true,
+        "maxLength": 64,
+        "description": "Codigo de reunion replicado para busqueda."
+      },
+      {
+        "displayName": "Document category",
+        "internalName": "MMDocumentCategory",
+        "type": "Choice",
+        "required": true,
+        "indexed": true,
+        "defaultValue": "PreRead",
+        "choices": [
+          "Agenda",
+          "Minutes",
+          "PreRead",
+          "Support",
+          "Logistics",
+          "Incident",
+          "Other"
+        ],
+        "description": "Categoria documental."
+      },
+      {
+        "displayName": "Document status",
+        "internalName": "MMDocumentStatus",
+        "type": "Choice",
+        "required": true,
+        "defaultValue": "Draft",
+        "choices": [
+          "Draft",
+          "Shared",
+          "Final",
+          "Archived"
+        ],
+        "description": "Estado documental."
+      },
+      {
+        "displayName": "Document date",
+        "internalName": "MMDocumentDate",
+        "type": "DateTime",
+        "required": false,
+        "displayFormat": "DateOnly",
+        "description": "Fecha funcional del documento."
+      },
+      {
+        "displayName": "Confidentiality",
+        "internalName": "MMConfidentiality",
+        "type": "Choice",
+        "required": true,
+        "defaultValue": "Internal",
+        "choices": [
+          "PublicInternal",
+          "Internal",
+          "Restricted",
+          "Confidential"
+        ],
+        "description": "Sensibilidad funcional."
+      },
+      {
+        "displayName": "Related room",
+        "internalName": "MMRelatedRoomLookup",
+        "type": "Lookup",
+        "required": false,
+        "lookupList": "MM_MeetingRooms",
+        "lookupField": "Title",
+        "description": "Sala asociada cuando aplica."
+      },
+      {
+        "displayName": "Template",
+        "internalName": "MMTemplateLookup",
+        "type": "Lookup",
+        "required": false,
+        "lookupList": "MM_MeetingTemplates",
+        "lookupField": "Title",
+        "description": "Plantilla de origen."
+      },
+      {
+        "displayName": "External document URL",
+        "internalName": "MMExternalDocumentUrl",
+        "type": "URL",
+        "required": false,
+        "description": "Referencia a sistema externo."
+      },
+      {
+        "displayName": "Retention label hint",
+        "internalName": "MMRetentionLabelHint",
+        "type": "Text",
+        "required": false,
+        "maxLength": 128,
+        "description": "Etiqueta de retencion sugerida."
+      }
+    ],
+    "indexes": [
+      "MMMeetingLookup",
+      "MMMeetingCode",
+      "MMDocumentCategory"
+    ],
+    "views": [
+      {
+        "title": "By meeting",
+        "setAsDefault": true,
+        "rowLimit": 100,
+        "fields": [
+          "DocIcon",
+          "LinkFilename",
+          "MMMeetingLookup",
+          "MMMeetingCode",
+          "MMDocumentCategory",
+          "MMDocumentStatus",
+          "Modified"
+        ],
+        "query": "<OrderBy><FieldRef Name='Modified' Ascending='FALSE' /></OrderBy>"
+      },
+      {
+        "title": "Final minutes",
+        "setAsDefault": false,
+        "rowLimit": 50,
+        "fields": [
+          "DocIcon",
+          "LinkFilename",
+          "MMMeetingLookup",
+          "MMDocumentDate",
+          "Modified"
+        ],
+        "query": "<Where><And><Eq><FieldRef Name='MMDocumentCategory' /><Value Type='Choice'>Minutes</Value></Eq><Eq><FieldRef Name='MMDocumentStatus' /><Value Type='Choice'>Final</Value></Eq></And></Where><OrderBy><FieldRef Name='Modified' Ascending='FALSE' /></OrderBy>"
+      }
+    ]
+  },
+  {
+    "title": "Template assets",
+    "internalName": "MM_TemplateAssets",
+    "kind": "Library",
+    "template": "DocumentLibrary",
+    "classification": "Master",
+    "description": "Biblioteca de archivos base reutilizables por las plantillas de reunion.",
+    "settings": {
+      "enableVersioning": true,
+      "majorVersions": 20,
+      "enableMinorVersions": true,
+      "minorVersions": 5,
+      "enableContentTypes": true,
+      "enableFolderCreation": false
+    },
+    "fields": [
+      {
+        "displayName": "Template",
+        "internalName": "MMTemplateLookup",
+        "type": "Lookup",
+        "required": false,
+        "indexed": true,
+        "lookupList": "MM_MeetingTemplates",
+        "lookupField": "Title",
+        "description": "Plantilla asociada."
+      },
+      {
+        "displayName": "Asset type",
+        "internalName": "MMTemplateAssetType",
+        "type": "Choice",
+        "required": true,
+        "defaultValue": "Document",
+        "choices": [
+          "Agenda",
+          "Checklist",
+          "Presentation",
+          "Document",
+          "Email"
+        ],
+        "description": "Tipo de recurso."
+      },
+      {
+        "displayName": "Category",
+        "internalName": "MMCategory",
+        "type": "Text",
+        "required": false,
+        "maxLength": 128,
+        "description": "Categoria o familia del activo."
+      },
+      {
+        "displayName": "Confidentiality",
+        "internalName": "MMConfidentiality",
+        "type": "Choice",
+        "required": true,
+        "defaultValue": "Internal",
+        "choices": [
+          "PublicInternal",
+          "Internal",
+          "Restricted",
+          "Confidential"
+        ],
+        "description": "Sensibilidad funcional."
+      },
+      {
+        "displayName": "Active",
+        "internalName": "MMActive",
+        "type": "Boolean",
+        "required": true,
+        "indexed": true,
+        "defaultValue": true,
+        "description": "Permite activar o retirar activos de plantilla."
+      }
+    ],
+    "indexes": [
+      "MMTemplateLookup",
+      "MMActive"
+    ],
+    "views": [
+      {
+        "title": "Active template assets",
+        "setAsDefault": true,
+        "rowLimit": 100,
+        "fields": [
+          "DocIcon",
+          "LinkFilename",
+          "MMTemplateLookup",
+          "MMTemplateAssetType",
+          "Modified",
+          "MMActive"
+        ],
+        "query": "<OrderBy><FieldRef Name='Modified' Ascending='FALSE' /></OrderBy>"
+      }
+    ]
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "solutionName": "Meet Manager",
+  "fieldGroup": "Meet Manager Columns",
+  "schemaFiles": [
+    "containers/01-master-data.json",
+    "containers/02-operational-data.json",
+    "containers/03-libraries.json"
+  ],
+  "contentTypeSchemaFile": "meet-manager.content-types.json"
+}

@@ -1,0 +1,1012 @@
+[
+  {
+    "title": "Meetings",
+    "internalName": "MM_Meetings",
+    "kind": "List",
+    "template": "GenericList",
+    "classification": "Transactional",
+    "description": "Registro maestro de reuniones presenciales, virtuales e hibridas.",
+    "settings": {
+      "enableVersioning": true,
+      "majorVersions": 100,
+      "enableAttachments": false
+    },
+    "fields": [
+      {
+        "displayName": "Meeting code",
+        "internalName": "MMMeetingCode",
+        "type": "Text",
+        "required": true,
+        "indexed": true,
+        "maxLength": 64,
+        "description": "Codigo funcional o referencia corporativa."
+      },
+      {
+        "displayName": "Meeting id",
+        "internalName": "MMMeetingId",
+        "type": "Text",
+        "required": false,
+        "indexed": true,
+        "maxLength": 128,
+        "description": "Identificador snapshot de compatibilidad para el servicio SPFx actual."
+      },
+      {
+        "displayName": "Description",
+        "internalName": "MMDescription",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 8,
+        "plainText": true,
+        "description": "Descripcion funcional de la reunion."
+      },
+      {
+        "displayName": "Organizer id snapshot",
+        "internalName": "MMOrganizerId",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Login o identificador de compatibilidad."
+      },
+      {
+        "displayName": "Organizer name snapshot",
+        "internalName": "MMOrganizerName",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Nombre visible de compatibilidad."
+      },
+      {
+        "displayName": "Organizer",
+        "internalName": "MMOrganizer",
+        "type": "User",
+        "required": true,
+        "indexed": true,
+        "allowMultiple": false,
+        "selectionMode": "PeopleOnly",
+        "description": "Organizador principal."
+      },
+      {
+        "displayName": "Organizer email snapshot",
+        "internalName": "MMOrganizerEmail",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Correo del organizador capturado para integraciones."
+      },
+      {
+        "displayName": "Organizer title snapshot",
+        "internalName": "MMOrganizerTitle",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Cargo de compatibilidad para la UI actual."
+      },
+      {
+        "displayName": "Organizer department snapshot",
+        "internalName": "MMOrganizerDepartment",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Departamento de compatibilidad para la UI actual."
+      },
+      {
+        "displayName": "Start date",
+        "internalName": "MMStartDate",
+        "type": "DateTime",
+        "required": true,
+        "indexed": true,
+        "displayFormat": "DateTime",
+        "description": "Inicio programado."
+      },
+      {
+        "displayName": "End date",
+        "internalName": "MMEndDate",
+        "type": "DateTime",
+        "required": true,
+        "indexed": true,
+        "displayFormat": "DateTime",
+        "description": "Fin programado."
+      },
+      {
+        "displayName": "Actual start date",
+        "internalName": "MMActualStartDate",
+        "type": "DateTime",
+        "required": false,
+        "displayFormat": "DateTime",
+        "description": "Inicio real."
+      },
+      {
+        "displayName": "Actual end date",
+        "internalName": "MMActualEndDate",
+        "type": "DateTime",
+        "required": false,
+        "displayFormat": "DateTime",
+        "description": "Fin real."
+      },
+      {
+        "displayName": "Meeting type",
+        "internalName": "MMMeetingType",
+        "type": "Choice",
+        "required": true,
+        "indexed": true,
+        "defaultValue": "Hybrid",
+        "choices": [
+          "Onsite",
+          "Virtual",
+          "Hybrid"
+        ],
+        "description": "Tipo de reunion."
+      },
+      {
+        "displayName": "Workflow status",
+        "internalName": "MMWorkflowStatus",
+        "type": "Choice",
+        "required": true,
+        "indexed": true,
+        "defaultValue": "Draft",
+        "choices": [
+          "Draft",
+          "Scheduled",
+          "Active",
+          "Completed",
+          "Cancelled"
+        ],
+        "description": "Estado operativo."
+      },
+      {
+        "displayName": "Priority",
+        "internalName": "MMPriority",
+        "type": "Choice",
+        "required": true,
+        "defaultValue": "Normal",
+        "choices": [
+          "Low",
+          "Normal",
+          "High",
+          "Critical"
+        ],
+        "description": "Prioridad funcional."
+      },
+      {
+        "displayName": "Room",
+        "internalName": "MMRoomLookup",
+        "type": "Lookup",
+        "required": false,
+        "indexed": true,
+        "lookupList": "MM_MeetingRooms",
+        "lookupField": "Title",
+        "description": "Sala reservada cuando procede."
+      },
+      {
+        "displayName": "Room id snapshot",
+        "internalName": "MMRoomId",
+        "type": "Text",
+        "required": false,
+        "maxLength": 128,
+        "description": "Identificador snapshot para compatibilidad con la UI actual."
+      },
+      {
+        "displayName": "Room name snapshot",
+        "internalName": "MMRoomName",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Nombre de sala snapshot para compatibilidad."
+      },
+      {
+        "displayName": "Location",
+        "internalName": "MMLocationLookup",
+        "type": "Lookup",
+        "required": false,
+        "indexed": true,
+        "lookupList": "MM_Locations",
+        "lookupField": "Title",
+        "description": "Ubicacion visible o alternativa."
+      },
+      {
+        "displayName": "Teams meeting URL",
+        "internalName": "MMTeamsMeetingUrl",
+        "type": "URL",
+        "required": false,
+        "description": "Join URL de Teams."
+      },
+      {
+        "displayName": "Teams online meeting id",
+        "internalName": "MMTeamsOnlineMeetingId",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Identificador online meeting de Graph."
+      },
+      {
+        "displayName": "Teams meeting id compatibility",
+        "internalName": "MMTeamsMeetingId",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Campo snapshot de compatibilidad con la UI actual."
+      },
+      {
+        "displayName": "Teams team id",
+        "internalName": "MMTeamsTeamId",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Team asociado."
+      },
+      {
+        "displayName": "Teams channel id",
+        "internalName": "MMTeamsChannelId",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Canal asociado."
+      },
+      {
+        "displayName": "Teams team name snapshot",
+        "internalName": "MMTeamName",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Nombre visible del team para compatibilidad."
+      },
+      {
+        "displayName": "Teams channel name snapshot",
+        "internalName": "MMChannelName",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Nombre visible del canal para compatibilidad."
+      },
+      {
+        "displayName": "Calendar event id",
+        "internalName": "MMCalendarEventId",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Id del evento de calendario."
+      },
+      {
+        "displayName": "Calendar owner UPN",
+        "internalName": "MMCalendarOwnerUpn",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "UPN del calendario propietario."
+      },
+      {
+        "displayName": "Requires room",
+        "internalName": "MMRequiresRoom",
+        "type": "Boolean",
+        "required": true,
+        "defaultValue": false,
+        "description": "Si la reunion requiere reserva de sala."
+      },
+      {
+        "displayName": "Requires Teams",
+        "internalName": "MMRequiresTeams",
+        "type": "Boolean",
+        "required": true,
+        "defaultValue": false,
+        "description": "Si la reunion requiere enlace Teams."
+      },
+      {
+        "displayName": "Has conflicts",
+        "internalName": "MMHasConflicts",
+        "type": "Boolean",
+        "required": true,
+        "indexed": true,
+        "defaultValue": false,
+        "description": "Marca conflictos detectados."
+      },
+      {
+        "displayName": "Conflict summary",
+        "internalName": "MMConflictSummary",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 6,
+        "plainText": true,
+        "description": "Resumen legible del conflicto."
+      },
+      {
+        "displayName": "Equipment needs",
+        "internalName": "MMEquipmentNeeds",
+        "type": "MultiChoice",
+        "required": false,
+        "choices": [
+          "Display",
+          "Camera",
+          "Microphone",
+          "Whiteboard",
+          "Speakerphone",
+          "Recording",
+          "DualScreen",
+          "Accessible",
+          "HybridKit"
+        ],
+        "description": "Necesidades de equipamiento."
+      },
+      {
+        "displayName": "Attendees JSON",
+        "internalName": "MMAttendeesJson",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Snapshot JSON para compatibilidad del servicio actual."
+      },
+      {
+        "displayName": "External guests JSON",
+        "internalName": "MMExternalGuestsJson",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Snapshot JSON para compatibilidad del servicio actual."
+      },
+      {
+        "displayName": "Tags JSON",
+        "internalName": "MMTagsJson",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 8,
+        "plainText": true,
+        "description": "Snapshot JSON de etiquetas para compatibilidad."
+      },
+      {
+        "displayName": "Equipment JSON",
+        "internalName": "MMEquipmentJson",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 8,
+        "plainText": true,
+        "description": "Snapshot JSON de requisitos para compatibilidad."
+      },
+      {
+        "displayName": "Category",
+        "internalName": "MMCategory",
+        "type": "Text",
+        "required": false,
+        "maxLength": 128,
+        "description": "Categoria funcional."
+      },
+      {
+        "displayName": "Tags",
+        "internalName": "MMTags",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Etiquetas separadas por punto y coma."
+      },
+      {
+        "displayName": "Agenda",
+        "internalName": "MMAgenda",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Agenda textual."
+      },
+      {
+        "displayName": "Agenda JSON",
+        "internalName": "MMAgendaJson",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Snapshot JSON de agenda para compatibilidad."
+      },
+      {
+        "displayName": "Pre-meeting notes",
+        "internalName": "MMPreMeetingNotes",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Notas previas."
+      },
+      {
+        "displayName": "Checklist JSON",
+        "internalName": "MMChecklistJson",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Checklist serializado para experiencia operativa avanzada."
+      },
+      {
+        "displayName": "Documents JSON",
+        "internalName": "MMDocumentsJson",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Snapshot JSON de documentos para compatibilidad."
+      },
+      {
+        "displayName": "Notes JSON",
+        "internalName": "MMNotesJson",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Snapshot JSON de notas para compatibilidad."
+      },
+      {
+        "displayName": "Changes JSON",
+        "internalName": "MMChangesJson",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Snapshot JSON de cambios para compatibilidad."
+      },
+      {
+        "displayName": "Incidents JSON",
+        "internalName": "MMIncidentsJson",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Snapshot JSON de incidencias para compatibilidad."
+      },
+      {
+        "displayName": "Is favorite",
+        "internalName": "MMIsFavorite",
+        "type": "Boolean",
+        "required": false,
+        "defaultValue": false,
+        "description": "Campo de compatibilidad para favoritos en la UI actual."
+      },
+      {
+        "displayName": "External guests",
+        "internalName": "MMExternalGuests",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 8,
+        "plainText": true,
+        "description": "Invitados externos separados por linea o punto y coma."
+      },
+      {
+        "displayName": "Sync status",
+        "internalName": "MMSyncStatus",
+        "type": "Choice",
+        "required": true,
+        "defaultValue": "NotSynced",
+        "choices": [
+          "NotSynced",
+          "Pending",
+          "Synced",
+          "Failed"
+        ],
+        "description": "Estado de sincronizacion con servicios externos."
+      },
+      {
+        "displayName": "Last sync UTC",
+        "internalName": "MMLastSyncUtc",
+        "type": "DateTime",
+        "required": false,
+        "displayFormat": "DateTime",
+        "description": "Ultima fecha de sincronizacion."
+      }
+    ],
+    "indexes": [
+      "MMMeetingCode",
+      "MMOrganizer",
+      "MMStartDate",
+      "MMEndDate",
+      "MMMeetingType",
+      "MMWorkflowStatus",
+      "MMRoomLookup",
+      "MMLocationLookup",
+      "MMHasConflicts"
+    ],
+    "views": [
+      {
+        "title": "All meetings",
+        "setAsDefault": true,
+        "rowLimit": 100,
+        "fields": [
+          "Title",
+          "MMMeetingCode",
+          "MMOrganizer",
+          "MMStartDate",
+          "MMEndDate",
+          "MMMeetingType",
+          "MMWorkflowStatus",
+          "MMRoomLookup",
+          "MMHasConflicts"
+        ],
+        "query": "<OrderBy><FieldRef Name='MMStartDate' Ascending='FALSE' /></OrderBy>"
+      },
+      {
+        "title": "Upcoming meetings",
+        "setAsDefault": false,
+        "rowLimit": 50,
+        "fields": [
+          "Title",
+          "MMMeetingCode",
+          "MMStartDate",
+          "MMEndDate",
+          "MMMeetingType",
+          "MMWorkflowStatus",
+          "MMRoomLookup"
+        ],
+        "query": "<Where><Geq><FieldRef Name='MMStartDate' /><Value IncludeTimeValue='TRUE' Type='DateTime'><Today /></Value></Geq></Where><OrderBy><FieldRef Name='MMStartDate' /></OrderBy>"
+      },
+      {
+        "title": "Conflicted meetings",
+        "setAsDefault": false,
+        "rowLimit": 50,
+        "fields": [
+          "Title",
+          "MMMeetingCode",
+          "MMStartDate",
+          "MMEndDate",
+          "MMOrganizer",
+          "MMRoomLookup",
+          "MMConflictSummary"
+        ],
+        "query": "<Where><Eq><FieldRef Name='MMHasConflicts' /><Value Type='Boolean'>1</Value></Eq></Where><OrderBy><FieldRef Name='MMStartDate' /></OrderBy>"
+      }
+    ]
+  },
+  {
+    "title": "Meeting attendees",
+    "internalName": "MM_MeetingAttendees",
+    "kind": "List",
+    "template": "GenericList",
+    "classification": "Transactional",
+    "description": "Asistentes normalizados por reunion para reporting y seguimiento.",
+    "settings": {
+      "enableVersioning": true,
+      "majorVersions": 50,
+      "enableAttachments": false
+    },
+    "fields": [
+      {
+        "displayName": "Meeting",
+        "internalName": "MMMeetingLookup",
+        "type": "Lookup",
+        "required": true,
+        "indexed": true,
+        "lookupList": "MM_Meetings",
+        "lookupField": "Title",
+        "description": "Reunion asociada."
+      },
+      {
+        "displayName": "Attendee type",
+        "internalName": "MMAttendeeType",
+        "type": "Choice",
+        "required": true,
+        "defaultValue": "Required",
+        "choices": [
+          "Required",
+          "Optional",
+          "Presenter",
+          "Organizer",
+          "Room",
+          "External"
+        ],
+        "description": "Rol del asistente."
+      },
+      {
+        "displayName": "Attendee",
+        "internalName": "MMAttendee",
+        "type": "User",
+        "required": false,
+        "allowMultiple": false,
+        "selectionMode": "PeopleOnly",
+        "description": "Usuario interno cuando aplica."
+      },
+      {
+        "displayName": "Attendee email",
+        "internalName": "MMAttendeeEmail",
+        "type": "Text",
+        "required": true,
+        "indexed": true,
+        "maxLength": 255,
+        "description": "Correo del asistente."
+      },
+      {
+        "displayName": "Attendee name",
+        "internalName": "MMAttendeeName",
+        "type": "Text",
+        "required": true,
+        "maxLength": 255,
+        "description": "Nombre visible del asistente."
+      },
+      {
+        "displayName": "Response status",
+        "internalName": "MMResponseStatus",
+        "type": "Choice",
+        "required": true,
+        "defaultValue": "Pending",
+        "choices": [
+          "Pending",
+          "Accepted",
+          "Tentative",
+          "Declined",
+          "None"
+        ],
+        "description": "Estado de respuesta."
+      },
+      {
+        "displayName": "Is external",
+        "internalName": "MMIsExternal",
+        "type": "Boolean",
+        "required": true,
+        "defaultValue": false,
+        "description": "Marca asistencia externa al tenant."
+      },
+      {
+        "displayName": "Attendance status",
+        "internalName": "MMAttendanceStatus",
+        "type": "Choice",
+        "required": true,
+        "defaultValue": "NotTracked",
+        "choices": [
+          "NotTracked",
+          "Attended",
+          "NoShow",
+          "Partial"
+        ],
+        "description": "Estado de asistencia final."
+      },
+      {
+        "displayName": "Join method",
+        "internalName": "MMJoinMethod",
+        "type": "Choice",
+        "required": true,
+        "defaultValue": "Unknown",
+        "choices": [
+          "InPerson",
+          "Teams",
+          "Hybrid",
+          "Unknown"
+        ],
+        "description": "Modalidad real de acceso."
+      },
+      {
+        "displayName": "Check-in time",
+        "internalName": "MMCheckInTime",
+        "type": "DateTime",
+        "required": false,
+        "displayFormat": "DateTime",
+        "description": "Hora de check-in o primera conexion."
+      },
+      {
+        "displayName": "Comments",
+        "internalName": "MMComments",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 6,
+        "plainText": true,
+        "description": "Comentarios adicionales."
+      }
+    ],
+    "indexes": [
+      "MMMeetingLookup",
+      "MMAttendeeEmail"
+    ],
+    "views": [
+      {
+        "title": "By meeting",
+        "setAsDefault": true,
+        "rowLimit": 100,
+        "fields": [
+          "Title",
+          "MMMeetingLookup",
+          "MMAttendeeName",
+          "MMAttendeeEmail",
+          "MMAttendeeType",
+          "MMResponseStatus",
+          "MMAttendanceStatus"
+        ],
+        "query": "<OrderBy><FieldRef Name='MMMeetingLookup' /><FieldRef Name='MMAttendeeName' /></OrderBy>"
+      }
+    ]
+  },
+  {
+    "title": "Meeting notes",
+    "internalName": "MM_MeetingNotes",
+    "kind": "List",
+    "template": "GenericList",
+    "classification": "Transactional",
+    "description": "Notas, decisiones y checklist operativo asociado a reuniones.",
+    "settings": {
+      "enableVersioning": true,
+      "majorVersions": 100,
+      "enableAttachments": false
+    },
+    "fields": [
+      {
+        "displayName": "Meeting",
+        "internalName": "MMMeetingLookup",
+        "type": "Lookup",
+        "required": true,
+        "indexed": true,
+        "lookupList": "MM_Meetings",
+        "lookupField": "Title",
+        "description": "Reunion asociada."
+      },
+      {
+        "displayName": "Note type",
+        "internalName": "MMNoteType",
+        "type": "Choice",
+        "required": true,
+        "defaultValue": "Operational",
+        "choices": [
+          "Operational",
+          "PreMeeting",
+          "Decision",
+          "FollowUp",
+          "Checklist",
+          "Log"
+        ],
+        "description": "Categoria operativa de la nota."
+      },
+      {
+        "displayName": "Note text",
+        "internalName": "MMNoteText",
+        "type": "Note",
+        "required": true,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Texto de la nota."
+      },
+      {
+        "displayName": "Is private",
+        "internalName": "MMIsPrivate",
+        "type": "Boolean",
+        "required": true,
+        "defaultValue": false,
+        "description": "Restringe visibilidad funcional."
+      },
+      {
+        "displayName": "Is pinned",
+        "internalName": "MMIsPinned",
+        "type": "Boolean",
+        "required": true,
+        "defaultValue": false,
+        "description": "Destaca la nota."
+      },
+      {
+        "displayName": "Due date",
+        "internalName": "MMDueDate",
+        "type": "DateTime",
+        "required": false,
+        "displayFormat": "DateOnly",
+        "description": "Fecha objetivo si es accion de seguimiento."
+      },
+      {
+        "displayName": "Completed",
+        "internalName": "MMCompleted",
+        "type": "Boolean",
+        "required": true,
+        "indexed": true,
+        "defaultValue": false,
+        "description": "Marca una accion o checklist como completado."
+      },
+      {
+        "displayName": "Related step",
+        "internalName": "MMRelatedStep",
+        "type": "Text",
+        "required": false,
+        "maxLength": 128,
+        "description": "Identificador o etiqueta de paso."
+      }
+    ],
+    "indexes": [
+      "MMMeetingLookup",
+      "MMCompleted"
+    ],
+    "views": [
+      {
+        "title": "Latest notes",
+        "setAsDefault": true,
+        "rowLimit": 100,
+        "fields": [
+          "Title",
+          "MMMeetingLookup",
+          "MMNoteType",
+          "MMCompleted",
+          "Author",
+          "Created"
+        ],
+        "query": "<OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy>"
+      }
+    ]
+  },
+  {
+    "title": "Meeting incidents",
+    "internalName": "MM_MeetingIncidents",
+    "kind": "List",
+    "template": "GenericList",
+    "classification": "Transactional",
+    "description": "Incidencias operativas relacionadas con salas, conectividad o soporte.",
+    "settings": {
+      "enableVersioning": true,
+      "majorVersions": 100,
+      "enableAttachments": true
+    },
+    "fields": [
+      {
+        "displayName": "Meeting",
+        "internalName": "MMMeetingLookup",
+        "type": "Lookup",
+        "required": true,
+        "indexed": true,
+        "lookupList": "MM_Meetings",
+        "lookupField": "Title",
+        "description": "Reunion afectada."
+      },
+      {
+        "displayName": "Incident meeting id snapshot",
+        "internalName": "MMIncidentMeetingId",
+        "type": "Text",
+        "required": false,
+        "maxLength": 128,
+        "description": "Identificador snapshot de reunion para la UI actual."
+      },
+      {
+        "displayName": "Room",
+        "internalName": "MMRoomLookup",
+        "type": "Lookup",
+        "required": false,
+        "indexed": true,
+        "lookupList": "MM_MeetingRooms",
+        "lookupField": "Title",
+        "description": "Sala afectada si aplica."
+      },
+      {
+        "displayName": "Incident type",
+        "internalName": "MMIncidentType",
+        "type": "Choice",
+        "required": true,
+        "choices": [
+          "Room",
+          "Connectivity",
+          "Teams",
+          "Equipment",
+          "Logistics",
+          "Other"
+        ],
+        "description": "Tipo principal de incidencia."
+      },
+      {
+        "displayName": "Severity",
+        "internalName": "MMSeverity",
+        "type": "Choice",
+        "required": true,
+        "indexed": true,
+        "defaultValue": "Medium",
+        "choices": [
+          "Low",
+          "Medium",
+          "High",
+          "Critical"
+        ],
+        "description": "Severidad."
+      },
+      {
+        "displayName": "Incident severity compatibility",
+        "internalName": "MMIncidentSeverity",
+        "type": "Choice",
+        "required": false,
+        "choices": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "description": "Campo snapshot de compatibilidad con la UI actual."
+      },
+      {
+        "displayName": "Incident status",
+        "internalName": "MMIncidentStatus",
+        "type": "Choice",
+        "required": true,
+        "indexed": true,
+        "defaultValue": "Open",
+        "choices": [
+          "Open",
+          "Investigating",
+          "Resolved",
+          "Closed"
+        ],
+        "description": "Estado del incidente."
+      },
+      {
+        "displayName": "Reported by",
+        "internalName": "MMReportedBy",
+        "type": "User",
+        "required": true,
+        "allowMultiple": false,
+        "selectionMode": "PeopleOnly",
+        "description": "Usuario que reporta."
+      },
+      {
+        "displayName": "Owned by",
+        "internalName": "MMOwnedBy",
+        "type": "User",
+        "required": false,
+        "allowMultiple": false,
+        "selectionMode": "PeopleOnly",
+        "description": "Responsable de resolucion."
+      },
+      {
+        "displayName": "Owner name snapshot",
+        "internalName": "MMOwnerName",
+        "type": "Text",
+        "required": false,
+        "maxLength": 255,
+        "description": "Nombre visible snapshot para compatibilidad."
+      },
+      {
+        "displayName": "Occurred at",
+        "internalName": "MMOccurredAt",
+        "type": "DateTime",
+        "required": true,
+        "displayFormat": "DateTime",
+        "description": "Momento de ocurrencia."
+      },
+      {
+        "displayName": "Description",
+        "internalName": "MMDescription",
+        "type": "Note",
+        "required": true,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Descripcion de la incidencia."
+      },
+      {
+        "displayName": "Resolution",
+        "internalName": "MMResolution",
+        "type": "Note",
+        "required": false,
+        "numberOfLines": 12,
+        "plainText": true,
+        "description": "Resolucion aplicada."
+      },
+      {
+        "displayName": "Resolution date",
+        "internalName": "MMResolutionDate",
+        "type": "DateTime",
+        "required": false,
+        "displayFormat": "DateTime",
+        "description": "Fecha de resolucion."
+      },
+      {
+        "displayName": "External ticket id",
+        "internalName": "MMExternalTicketId",
+        "type": "Text",
+        "required": false,
+        "maxLength": 128,
+        "description": "Referencia en sistema externo."
+      }
+    ],
+    "indexes": [
+      "MMMeetingLookup",
+      "MMRoomLookup",
+      "MMSeverity",
+      "MMIncidentStatus"
+    ],
+    "views": [
+      {
+        "title": "Open incidents",
+        "setAsDefault": true,
+        "rowLimit": 100,
+        "fields": [
+          "Title",
+          "MMMeetingLookup",
+          "MMRoomLookup",
+          "MMIncidentType",
+          "MMSeverity",
+          "MMIncidentStatus",
+          "MMOwnedBy"
+        ],
+        "query": "<Where><Neq><FieldRef Name='MMIncidentStatus' /><Value Type='Choice'>Closed</Value></Neq></Where><OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy>"
+      }
+    ]
+  }
+]
